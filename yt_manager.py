@@ -1,11 +1,9 @@
-
 import json
 
 def load_data():
     try:
         with open('youtube.txt', 'r') as file:
             test = json.load(file)
-            # print(type(test))
             return test
     except FileNotFoundError:
         return []
@@ -30,10 +28,10 @@ def add_video(videos):
 
 def update_video(videos):
     list_all_videos(videos)
-    index = int(input("Enter the video number to update"))
+    index = int(input("Enter the video number to update: "))
     if 1 <= index <= len(videos):
-        name = input("Enter the new video name")
-        time = input("Enter the new video time")
+        name = input("Enter the new video name: ")
+        time = input("Enter the new video time: ")
         videos[index-1] = {'name':name, 'time': time}
         save_data_helper(videos)
     else:
@@ -42,13 +40,14 @@ def update_video(videos):
 
 def delete_video(videos):
     list_all_videos(videos)
-    index = int(input("Enter the video number to be deleted"))
+    index = int(input("Enter the video number to be deleted: "))
     
     if 1<= index <= len(videos):
         del videos[index-1]
         save_data_helper(videos)
+        list_all_videos(videos)
     else:
-        print("Invalid video index selected")
+        print("Invalid video index selected!")
 
 
 def main():
@@ -61,7 +60,6 @@ def main():
         print("4. Delete a youtube video ")
         print("5. Exit the app ")
         choice = input("Enter your choice: ")
-        # print(videos)
 
         match choice:
             case '1':
@@ -79,4 +77,3 @@ def main():
 
 if __name__ ==  "__main__":
     main() 
-
